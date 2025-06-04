@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Categorized Skills</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: black;
+      overflow-x: hidden;
+    }
+
+    .skills-section {
+      padding: 100px 20px;
+      position: relative;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 200%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      background-size: cover;
+      opacity: 0.05;
+      z-index: -1;
+      animation: scroll-bg 20s linear infinite;
+    }
+
+    @keyframes scroll-bg {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .skills-heading {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 50px;
+    }
+
+    .skills-heading span {
+      color: red;
+    }
+
+    .category {
+      margin-bottom: 60px;
+    }
+
+    .category h3 {
+      font-size: 2rem;
+      color: red;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px red;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .skill-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid red;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px red;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .skill-box.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .skill-box:hover {
+      scale: 1.08;
+      box-shadow: 0 0 30px red;
+    }
+
+    @media (max-width: 600px) {
+      .skills-heading { font-size: 2.2rem; }
+      .category h3 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="skills-section" id="skills">
+    <div class="parallax-bg"></div>
+    <h2 class="skills-heading">My <span>Skills</span></h2>
+
+    <div id="skillsCategories">
+      <!-- Categories will be injected here -->
+    </div>
+  </section>
+
+  <script>
+    const skillData = {
+      "Frontend 💻": ["HTML5", "CSS3", "JavaScript", "React", "Tailwind", "Bootstrap"],
+      "Backend ⚙️": ["Node.js", "Express.js", "MongoDB", "MySQL", "Firebase"],
+      "Tools 🛠️": ["Git", "GitHub", "VS Code", "Postman", "Netlify"],
+      "Design 🎨": ["Figma", "Adobe XD", "Canva"]
+    };
+
+    const categoriesContainer = document.getElementById('skillsCategories');
+
+    // Generate categories and skills
+    for (const [category, skills] of Object.entries(skillData)) {
+      const categoryDiv = document.createElement('div');
+      categoryDiv.className = 'category';
+
+      const title = document.createElement('h3');
+      title.textContent = category;
+      categoryDiv.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'skills-grid';
+
+      skills.forEach(skill => {
+        const skillBox = document.createElement('div');
+        skillBox.className = 'skill-box';
+        skillBox.textContent = skill;
+        grid.appendChild(skillBox);
+      });
+
+      categoryDiv.appendChild(grid);
+      categoriesContainer.appendChild(categoryDiv);
+    }
+
+    // Animate skill boxes on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.skill-box').forEach(el => observer.observe(el));
+
+    // Optional parallax scroll effect
+    window.addEventListener('scroll', () => {
+      const scrollVal = window.scrollY;
+      document.querySelector('.parallax-bg').style.transform = `translateX(-${scrollVal * 0.1}px)`;
+    });
+  </script>
+
+</body>
+</html>

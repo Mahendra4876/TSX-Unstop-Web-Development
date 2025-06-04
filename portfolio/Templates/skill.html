@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width , initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="=IE-edge">
+<title>Skills</title>
+<link rel="stylesheet" href="../css/skill.css">
+<link rel="stylesheet" href="/javascript.js/cursor.js">
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<header>    
+        <a  href="" id="logo" ><img src="../images/logo.png" width="50px" height="40px">PORTFOLIO</a>
+    <abbr title="Nav bar"><details><summary><i class="fa-solid fa-bars fa-beat-fade" style="color: #ea1026;"></i></summary><div class="nav" id="nav1"></abbr>
+    <a href="../index.html" id="home">HOME</a>
+    <a href="../Templates/about.html">ABOUT</a>
+    <a href="#">SKILLS</a>
+    <a href="../Templates/Project.html">PROJECTS</a>
+    <a href="../Templates/contact.html">CONTACT</a>  
+
+    </div></details>    
+    </header>
+    <section class="skills-section" id="skills">
+        <div class="parallax-bg"></div>
+        <h2 class="skills-heading">My <span>Skills</span></h2>
+    
+        <div id="skillsCategories">
+        </div>
+      </section>
+    
+      <script>
+        const skillData = {
+          "Web Development 💻": ["HTML5", "CSS3", "JavaScript", "React","Bootstrap"],
+          " Programming⚙️": ["Python","Java","MySQL","Flask"],
+          "Tools 🛠️": ["Git", "GitHub", "VS Code","XAMP","Google Colab"],
+        };
+    
+        const categoriesContainer = document.getElementById('skillsCategories');
+        for (const [category, skills] of Object.entries(skillData)) {
+          const categoryDiv = document.createElement('div');
+          categoryDiv.className = 'category';
+    
+          const title = document.createElement('h3');
+          title.textContent = category;
+          categoryDiv.appendChild(title);
+    
+          const grid = document.createElement('div');
+          grid.className = 'skills-grid';
+    
+          skills.forEach(skill => {
+            const skillBox = document.createElement('div');
+            skillBox.className = 'skill-box';
+            skillBox.textContent = skill;
+            grid.appendChild(skillBox);
+          });
+    
+          categoryDiv.appendChild(grid);
+          categoriesContainer.appendChild(categoryDiv);
+        }
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.2 });
+    
+        document.querySelectorAll('.skill-box').forEach(el => observer.observe(el));
+        window.addEventListener('scroll', () => {
+          const scrollVal = window.scrollY;
+          document.querySelector('.parallax-bg').style.transform = `translateX(-${scrollVal * 0.1}px)`;
+        });
+      </script>
+</body>
+<html>

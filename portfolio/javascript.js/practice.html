@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UFT-8">
+        <meta name="viewport" content="width-device-width,initial-scale=1.0">
+        <style>
+            *{
+                margin:0px;
+                padding:0px;
+            }
+             body{
+                width:70%;
+            } 
+            .slider{
+                position: relative;
+                    display:flex;
+                    justify-content:center;
+                    overflow:hidden;
+                
+            }
+            .container{
+                position:relative;
+                display: flex;
+                width:100vh;
+                justify-content: center;
+                animation: scrool 12s infinite;
+            }
+
+            img{
+         height: auto;
+            }
+            @keyframes scrool{
+                0%{
+                    transform: translateX(0);
+                }
+                25%{
+                    transform: translateX(-100%);
+                } 
+                50%{
+                    transform: translateX(-200%);
+                } 
+                100%{
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slider">
+            <div class="container">
+                <a href="../index.html"><img src="../images/logo.png" alt="h"></a>
+                <img src="../images/logo.png" alt="">
+                <img src="../images/logo.png" alt="">
+                <img src="../images/logo.png" alt="">
+                <img src="../images/logo.png" alt="">
+                <img src="../images/logo.png" alt="">
+            </div>
+        </div>
+        <div><a href="../index.html"><img src="../images/WhatsApp Image 2024-10-18 at 13.55.16_d3acb24a.jpg"></a>
+    </body>
+<script>
+    // let g=document.querySelectorAll("img");
+    // let h=document.createElement("a")
+    // h.innerHTML="<a href=../indx.html></a>"
+    // console.log(h)
+</script>
+</html>
